@@ -1,6 +1,6 @@
 # Regras de JavaScript e TypeScript
 
-Estas regras se aplicam a todo código JavaScript e TypeScript do frontend e do backend. Em caso de conflito, siga a regra mais específica do contexto, desde que ela não reduza a segurança ou a clareza do código.
+Estas regras se aplicam a todo código JavaScript e TypeScript do frontend e das ferramentas associadas. Em caso de conflito, siga a regra mais específica do contexto, desde que ela não reduza a segurança ou a clareza do código.
 
 ## Preferir `const`
 

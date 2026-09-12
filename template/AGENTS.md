@@ -1,119 +1,54 @@
 # Contexto do projeto
 
-## Padrões de codificação
+Este template contém um frontend e um backend .NET 10 para sistemas empresariais de médio porte, executados no Azure Kubernetes Service (AKS). O backend é um mini-monólito modular: compartilha domínio e código entre os processos, mas disponibiliza hosts independentes para HTTP e processamento em segundo plano.
 
-Consulte [`.agents/rules/code-standards.md`](.agents/rules/code-standards.md) para os padrões de codificação e exemplos aplicáveis ao frontend e ao backend.
+Consulte [`backend/ARCHITECTURE.md`](backend/ARCHITECTURE.md) para a arquitetura de referência, os limites entre projetos e os fluxos entre API, workers e integrações.
 
-Consulte [`.agents/rules/javascript-typescript.md`](.agents/rules/javascript-typescript.md) para as regras de JavaScript e TypeScript, incluindo uso de `const`, comparações estritas, tipagem, arrow functions, ternários e validação com linter.
+## Padrões e regras
 
-Para regras específicas de Node.js, assincronismo, event loop, variáveis de ambiente, desligamento, logging, lock files e dependências entre módulos, consulte [`.agents/rules/node.md`](.agents/rules/node.md).
-
-Para regras específicas de componentes, hooks, acessibilidade e estilização React, consulte a skill [`react`](.agents/skills/react/SKILL.md).
-
-## Regras de testes
-
-Consulte [`.agents/rules/tests.md`](.agents/rules/tests.md) para as regras de testes automatizados, cobertura mínima, princípio FIRST, pirâmide de testes, Vitest, Playwright e organização dos testes E2E.
-
-Este repositório contém dois aplicativos independentes, um frontend e um backend. Os comandos abaixo devem ser executados dentro da pasta do aplicativo correspondente; não existe `package.json` na raiz.
-
-## Estrutura do projeto
-
-Consulte [`.agents/rules/folder-structure.md`](.agents/rules/folder-structure.md) para a organização de pastas e arquivos do frontend, backend e testes.
-
-## Frontend
-
-- Papel: interface web que consome a API do backend e exibe o status da API.
-- Tecnologia: React 19, TypeScript, Vite, Tailwind CSS e ESLint.
-- Diretório: `frontend/`.
-- Desenvolvimento: `http://localhost:5173` (porta padrão do Vite; pode ser alterada pelos argumentos do Vite).
-- API consumida atualmente: `http://localhost:3000/health`.
-
-### Skill obrigatória
-
-Antes de realizar qualquer implementação, correção, refatoração ou revisão de código no frontend, carregue a skill [`react`](.agents/skills/react/SKILL.md) (`$react`) e siga suas regras e referências. Isso se aplica a componentes, hooks, integração com backend, acessibilidade, estilização e testes do frontend.
+- Consulte [`.agents/rules/code-standards.md`](.agents/rules/code-standards.md) para padrões gerais de código.
+- Consulte [`.agents/rules/dotnet.md`](.agents/rules/dotnet.md) antes de alterar o backend .NET ou qualquer worker.
+- Consulte [`.agents/rules/folder-structure.md`](.agents/rules/folder-structure.md) para a organização obrigatória de projetos, código e testes.
+- Consulte [`.agents/rules/tests.md`](.agents/rules/tests.md) para cobertura, pirâmide de testes e ferramentas.
+- Consulte [`.agents/rules/javascript-typescript.md`](.agents/rules/javascript-typescript.md) para o frontend.
 
 ## Backend
 
-- Papel: API HTTP e servidor da aplicação.
-- Tecnologia: Node.js, Express 5, TypeScript, CORS e dotenv.
+- Tecnologia: .NET 10, ASP.NET Core Controllers, Cortex.Mediator, FluentValidation, Entity Framework Core, PostgreSQL, Redis, Hangfire, Polly, Microsoft Entra ID e Azure Event Hubs.
 - Diretório: `backend/`.
-- Desenvolvimento/produção: `http://localhost:3000` por padrão.
-- Porta: definida por `process.env.PORT`; se `PORT` não estiver definida, usa `3000`.
-- Health check: `GET /health`.
+- Solução: `Backend.slnx`.
+- A API expõe endpoints HTTP por Controllers; Controllers são finos e não contêm regras de negócio.
+- `Backend.App` orquestra os casos de uso com Cortex.Mediator; `Backend.Domain` não depende de infraestrutura.
+- Processamentos de longa duração, agendados, por polling e por eventos não são executados no host HTTP.
 
-## Pré-requisitos
+## Frontend
 
-É necessário ter Node.js e npm instalados. Cada aplicativo possui seu próprio `package-lock.json`; instale as dependências separadamente em cada diretório.
-
-## Instalação
-
-```bash
-cd frontend
-npm install
-
-cd ../backend
-npm install
-```
-
-## Execução em desenvolvimento
-
-Execute frontend e backend em terminais separados:
-
-```bash
-# terminal 1
-cd backend
-npm run dev
-
-# terminal 2
-cd frontend
-npm run dev
-```
-
-O backend ficará em `http://localhost:3000` e o frontend em `http://localhost:5173`. O frontend verifica o backend periodicamente pelo endpoint `/health`.
-
-Para usar outra porta no backend, defina `PORT`, por exemplo:
-
-```bash
-cd backend
-PORT=3001 npm run dev
-```
-
-Nesse caso, também é necessário atualizar a URL usada em `frontend/src/App.tsx`, pois ela está atualmente fixa em `http://localhost:3000/health`.
+- Tecnologia: React 19, TypeScript, Vite, Tailwind CSS e ESLint.
+- Diretório: `frontend/`.
+- Antes de implementar, corrigir ou revisar frontend, carregue a skill [`react`](.agents/skills/react/SKILL.md).
 
 ## Testes, validações e build
 
-### Frontend
-
-Não há framework de testes configurado no frontend. Os comandos disponíveis são:
+Execute os comandos dentro do diretório correspondente:
 
 ```bash
-cd frontend
-npm run lint       # executa o ESLint
-npm run typecheck  # verifica os tipos com TypeScript
-npm run build      # typecheck + build de produção em dist/
-npm run preview    # serve o build de produção localmente
-```
-
-### Backend
-
-Estado atual: `npm run build` também falha por causa de `noUnusedParameters` no `backend/src/index.ts` (os parâmetros `req` e `next` não são usados em handlers). Esse problema já existe no código e não foi alterado nesta documentação.
-
-```bash
+# backend
 cd backend
-npm run build      # compila TypeScript para dist/
-npm test           
-npm start          # executa dist/index.js; requer build prévio
+dotnet build Backend.slnx
+dotnet test Backend.slnx
+
+# frontend
+cd frontend
+npm run lint
+npm run typecheck
+npm run build
 ```
 
-Para desenvolvimento, use `npm run dev`, descrito acima. O script usa Nodemon e `tsx` para reiniciar o servidor quando arquivos de `src/` mudam.
+Todo código produzido requer testes automatizados. A cobertura mínima é 80%; consulte as regras de testes para a estratégia por camada.
 
-## Observações para alterações
+## Observações de segurança e operação
 
-- Preserve a separação entre `frontend/` e `backend/`; as dependências são instaladas e os scripts são executados por diretório.
-- Ao alterar a porta ou o endereço da API, atualize também a URL em `frontend/src/App.tsx` ou extraia essa configuração para uma variável de ambiente.
-- Antes de concluir alterações no frontend, execute pelo menos `npm run lint`, `npm run typecheck` e `npm run build` dentro de `frontend/`.
-- No backend, execute `npm run build`;
-- No frontend, execute `npm run test`;
-- No backend, execute `npm run test`;
-
-<critical>SEMPRE SIGA AS REGRAS DE TESTE EM ./agents/rules/tests.md e implemente os testes para o código produzido</critical>
+- Não versione segredos, connection strings, chaves de API ou tokens.
+- Em AKS, use identidade de workload e configuração externa para recursos Azure.
+- Propague correlation IDs e contexto de tenant entre API, jobs e eventos.
+- Cada worker deve poder encerrar graciosamente e concluir ou devolver o trabalho em andamento de forma segura.

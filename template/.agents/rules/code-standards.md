@@ -1,6 +1,6 @@
 # Padrões de codificação
 
-Estas regras se aplicam ao frontend e ao backend, salvo quando houver uma restrição técnica específica documentada no próprio projeto.
+Estas regras se aplicam ao frontend e a qualquer código JavaScript ou TypeScript do repositório. Para o backend .NET, consulte também `dotnet.md`.
 
 ## Não inserir comentários
 
@@ -26,7 +26,7 @@ function canPublishArticle(article: Article): boolean {
 
 ## Limitar classes e arquivos a 100 linhas
 
-Classes e arquivos `.ts` devem ter, no máximo, 100 linhas. Quando esse limite for atingido, extraia responsabilidades para outras classes, funções ou arquivos coesos.
+Classes e arquivos TypeScript devem ter, no máximo, 100 linhas. Quando esse limite for atingido, extraia responsabilidades para outras classes, funções ou arquivos coesos.
 
 ```ts
 class OrderService {
