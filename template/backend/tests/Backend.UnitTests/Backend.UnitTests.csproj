@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="../../src/Backend.App/Backend.App.csproj" />
     <ProjectReference Include="../../src/Backend.Domain/Backend.Domain.csproj" />
+    <ProjectReference Include="../../src/Backend.Infra.Postgres/Backend.Infra.Postgres.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Using Include="Xunit" />
