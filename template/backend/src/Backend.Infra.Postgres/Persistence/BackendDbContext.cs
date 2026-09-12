@@ -1,3 +1,4 @@
+using Backend.Domain.Auditing;
 using Backend.Domain.Cadastros;
 using Backend.Domain.Integracoes;
 using Backend.Domain.Tickets;
@@ -35,7 +36,7 @@ public sealed class BackendDbContext(DbContextOptions<BackendDbContext> options)
             entity.HasIndex(x => x.NumeroExterno).IsUnique();
             entity.HasMany(x => x.Checklist)
                 .WithOne()
-                .HasForeignKey("TicketId")
+                .HasForeignKey(x => x.TicketId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
@@ -62,10 +63,12 @@ public sealed class BackendDbContext(DbContextOptions<BackendDbContext> options)
             entity.HasKey(x => x.EventId);
             entity.Property(x => x.EventId).HasMaxLength(160);
         });
+
+        modelBuilder.ApplyMandatoryAuditing();
     }
 }
 
-public sealed class EventoRecebido
+public sealed class EventoRecebido : AuditableEntity
 {
     private EventoRecebido() { }
     public EventoRecebido(string eventId, Guid ticketId)

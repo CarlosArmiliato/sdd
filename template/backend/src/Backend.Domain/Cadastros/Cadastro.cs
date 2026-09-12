@@ -1,6 +1,6 @@
 namespace Backend.Domain.Cadastros;
 
-public sealed class Cadastro
+public sealed class Cadastro : Backend.Domain.Auditing.AuditableEntity
 {
     public Guid Id { get; private set; }
     public CadastroTipo Tipo { get; private set; }

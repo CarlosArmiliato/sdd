@@ -1,6 +1,6 @@
 namespace Backend.Domain.Tickets;
 
-public sealed class Ticket
+public sealed class Ticket : Backend.Domain.Auditing.AuditableEntity
 {
     private readonly List<ChecklistItem> _checklist = [];
 
@@ -17,7 +17,7 @@ public sealed class Ticket
         Id = Guid.NewGuid();
         NumeroExterno = numeroExterno;
         CorrelationId = correlationId;
-        _checklist.AddRange([new("Item1"), new("Item2"), new("Item3")]);
+        _checklist.AddRange([new(Id, "Item1"), new(Id, "Item2"), new(Id, "Item3")]);
     }
 
     public void ResponderChecklist(

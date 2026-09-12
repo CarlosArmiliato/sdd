@@ -1,6 +1,6 @@
 namespace Backend.Domain.Integracoes;
 
-public sealed class Integracao
+public sealed class Integracao : Backend.Domain.Auditing.AuditableEntity
 {
     public Guid Id { get; private set; }
     public string Tipo { get; private set; } = string.Empty;
