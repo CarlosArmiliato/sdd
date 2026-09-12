@@ -18,7 +18,7 @@ public sealed class BackendDbContext(DbContextOptions<BackendDbContext> options)
         {
             entity.ToTable("Cadastros");
             entity.HasKey(x => x.Id);
-            entity.Property(x => x.Tipo).HasConversion<string>();
+            entity.Property(x => x.Tipo).HasEnumComment();
             entity.Property(x => x.Codigo).HasMaxLength(80);
             entity.Property(x => x.Nome).HasMaxLength(200);
             entity.Property(x => x.CodigoExterno).HasMaxLength(80);
@@ -44,14 +44,14 @@ public sealed class BackendDbContext(DbContextOptions<BackendDbContext> options)
             entity.ToTable("ChecklistItens");
             entity.HasKey(x => x.Id);
             entity.Property(x => x.Nome).HasMaxLength(80);
-            entity.Property(x => x.Resultado).HasConversion<string>();
+            entity.Property(x => x.Resultado).HasEnumComment();
         });
 
         modelBuilder.Entity<Integracao>(entity =>
         {
             entity.ToTable("Integracoes");
             entity.HasKey(x => x.Id);
-            entity.Property(x => x.Status).HasConversion<string>();
+            entity.Property(x => x.Status).HasEnumComment();
             entity.Property(x => x.Payload).HasColumnType("jsonb");
             entity.HasIndex(x => new { x.Status, x.DisponivelEm });
         });

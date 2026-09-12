@@ -1,28 +1,7 @@
 namespace Backend.Domain.Integracoes;
 
-public enum IntegracaoStatus
-{
-    Pendente,
-    Processando,
-    Concluida,
-    FalhaDefinitiva
-}
-
 public sealed class Integracao
 {
-    private Integracao() { }
-
-    public Integracao(Guid id, string tipo, string destino, string payload, string correlationId)
-    {
-        Id = id;
-        Tipo = tipo;
-        Destino = destino;
-        Payload = payload;
-        CorrelationId = correlationId;
-        CriadaEm = DateTimeOffset.UtcNow;
-        DisponivelEm = CriadaEm;
-    }
-
     public Guid Id { get; private set; }
     public string Tipo { get; private set; } = string.Empty;
     public string Destino { get; private set; } = string.Empty;
@@ -35,6 +14,20 @@ public sealed class Integracao
     public DateTimeOffset? ProcessamentoIniciadoEm { get; private set; }
     public DateTimeOffset? ProcessadaEm { get; private set; }
     public string? UltimoErro { get; private set; }
+
+    private Integracao() { }
+
+    public Integracao(Guid id, string tipo, string destino, string payload, string correlationId)
+    {
+        Id = id;
+        Tipo = tipo;
+        Destino = destino;
+        Payload = payload;
+        CorrelationId = correlationId;
+        Status = IntegracaoStatus.Pendente;
+        CriadaEm = DateTimeOffset.UtcNow;
+        DisponivelEm = CriadaEm;
+    }
 
     public void Concluir(DateTimeOffset processadaEm)
     {

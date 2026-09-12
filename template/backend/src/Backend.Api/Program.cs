@@ -1,4 +1,5 @@
 using Backend.Api.Configuration;
+using Backend.Api.Filters;
 using Backend.App;
 using Backend.App.Abstractions;
 using Backend.App.Health;
@@ -15,7 +16,7 @@ builder.Logging.ClearProviders();
 builder.Logging.AddJsonConsole();
 
 builder.Services.AddOpenApi();
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add<ResponseResultFilter>());
 builder.Services.AddProblemDetails();
 builder.Services.AddApiCors(builder.Configuration);
 builder.Services.AddSingleton<IClock, SystemClock>();
