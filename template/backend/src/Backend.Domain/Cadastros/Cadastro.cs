@@ -1,3 +1,5 @@
+using Backend.Domain.Auditing;
+
 namespace Backend.Domain.Cadastros;
 
 public enum CadastroTipo
@@ -8,7 +10,7 @@ public enum CadastroTipo
     Cultura
 }
 
-public sealed class Cadastro
+public sealed class Cadastro : AuditableEntity
 {
     private Cadastro() { }
 

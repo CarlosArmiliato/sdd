@@ -1,3 +1,5 @@
+using Backend.Domain.Auditing;
+
 namespace Backend.Domain.Tickets;
 
 public enum ChecklistResultado
@@ -6,7 +8,7 @@ public enum ChecklistResultado
     NaoConforme
 }
 
-public sealed class Ticket
+public sealed class Ticket : AuditableEntity
 {
     private readonly List<ChecklistItem> _checklist = [];
     private Ticket() { }
@@ -16,7 +18,7 @@ public sealed class Ticket
         Id = Guid.NewGuid();
         NumeroExterno = numeroExterno;
         CorrelationId = correlationId;
-        _checklist.AddRange([new("Item1"), new("Item2"), new("Item3")]);
+        _checklist.AddRange([new(Id, "Item1"), new(Id, "Item2"), new(Id, "Item3")]);
     }
 
     public Guid Id { get; private set; }
@@ -43,12 +45,18 @@ public sealed class Ticket
     }
 }
 
-public sealed class ChecklistItem
+public sealed class ChecklistItem : AuditableEntity, ITouchesParent<Ticket, Guid>
 {
     private ChecklistItem() { }
-    internal ChecklistItem(string nome) => Nome = nome;
+    internal ChecklistItem(Guid ticketId, string nome)
+    {
+        TicketId = ticketId;
+        Nome = nome;
+    }
 
     public Guid Id { get; private set; } = Guid.NewGuid();
+    public Guid TicketId { get; private set; }
+    public Guid ParentId => TicketId;
     public string Nome { get; private set; } = string.Empty;
     public ChecklistResultado? Resultado { get; private set; }
 

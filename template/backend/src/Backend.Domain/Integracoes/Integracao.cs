@@ -1,3 +1,5 @@
+using Backend.Domain.Auditing;
+
 namespace Backend.Domain.Integracoes;
 
 public enum IntegracaoStatus
@@ -8,7 +10,7 @@ public enum IntegracaoStatus
     FalhaDefinitiva
 }
 
-public sealed class Integracao
+public sealed class Integracao : AuditableEntity
 {
     private Integracao() { }
 
