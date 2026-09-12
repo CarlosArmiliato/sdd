@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-worker-polling
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: backend-worker-polling
+  template:
+    metadata:
+      labels:
+        app: backend-worker-polling
+    spec:
+      serviceAccountName: backend-workload
+      containers:
+        - name: worker
+          image: replace.azurecr.io/backend-worker-polling:latest
+          envFrom:
+            - secretRef:
+                name: backend-runtime
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: backend-worker-polling
+spec:
+  scaleTargetRef:
+    name: backend-worker-polling
+  minReplicaCount: 0
+  maxReplicaCount: 20
+  pollingInterval: 15
+  cooldownPeriod: 60
+  triggers:
+    - type: postgresql
+      metadata:
+        connectionFromEnv: ConnectionStrings__Postgres
+        query: >-
+          SELECT COUNT(1) FROM "Integracoes"
+          WHERE ("Status" = 'Pendente' AND "DisponivelEm" <= now())
+             OR ("Status" = 'Processando' AND "ProcessamentoIniciadoEm" < now() - interval '5 minutes')
+        targetQueryValue: "1"

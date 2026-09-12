@@ -1,8 +1,28 @@
 <Solution>
-  <Project Path="src/Backend.Api/Backend.Api.csproj" />
-  <Project Path="src/Backend.Application/Backend.Application.csproj" />
-  <Project Path="src/Backend.Domain/Backend.Domain.csproj" />
-  <Project Path="src/Backend.Infrastructure/Backend.Infrastructure.csproj" />
-  <Project Path="tests/Backend.UnitTests/Backend.UnitTests.csproj" />
-  <Project Path="tests/Backend.IntegrationTests/Backend.IntegrationTests.csproj" />
+  <Folder Name="/Hosts/">
+    <Project Path="src/Backend.Api/Backend.Api.csproj" />
+    <Project Path="src/Backend.Worker.EventHub/Backend.Worker.EventHub.csproj" />
+    <Project Path="src/Backend.Worker.Hangfire/Backend.Worker.Hangfire.csproj" />
+    <Project Path="src/Backend.Worker.Polling/Backend.Worker.Polling.csproj" />
+  </Folder>
+  <Folder Name="/Core/">
+    <Project Path="src/Backend.App/Backend.App.csproj" />
+    <Project Path="src/Backend.Contracts/Backend.Contracts.csproj" />
+    <Project Path="src/Backend.Domain/Backend.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="src/Backend.Infra/Backend.Infra.csproj" />
+    <Project Path="src/Backend.Infra.EventHub/Backend.Infra.EventHub.csproj" />
+    <Project Path="src/Backend.Infra.Gate.EmpresaA/Backend.Infra.Gate.EmpresaA.csproj" />
+    <Project Path="src/Backend.Infra.Gate.EmpresaB/Backend.Infra.Gate.EmpresaB.csproj" />
+    <Project Path="src/Backend.Infra.Gate.Sap/Backend.Infra.Gate.Sap.csproj" />
+    <Project Path="src/Backend.Infra.Hangfire/Backend.Infra.Hangfire.csproj" />
+    <Project Path="src/Backend.Infra.Postgres/Backend.Infra.Postgres.csproj" />
+    <Project Path="src/Backend.Infra.Redis/Backend.Infra.Redis.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="tests/Backend.ArchitectureTests/Backend.ArchitectureTests.csproj" />
+    <Project Path="tests/Backend.IntegrationTests/Backend.IntegrationTests.csproj" />
+    <Project Path="tests/Backend.UnitTests/Backend.UnitTests.csproj" />
+  </Folder>
 </Solution>

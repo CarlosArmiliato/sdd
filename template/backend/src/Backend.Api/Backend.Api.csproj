@@ -1,10 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.Identity.Web" />
+    <PackageReference Include="Scalar.AspNetCore" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../Backend.Application/Backend.Application.csproj" />
-    <ProjectReference Include="../Backend.Domain/Backend.Domain.csproj" />
-    <ProjectReference Include="../Backend.Infrastructure/Backend.Infrastructure.csproj" />
+    <ProjectReference Include="../Backend.App/Backend.App.csproj" />
+    <ProjectReference Include="../Backend.Infra.Gate.Sap/Backend.Infra.Gate.Sap.csproj" />
+    <ProjectReference Include="../Backend.Infra.Hangfire/Backend.Infra.Hangfire.csproj" />
+    <ProjectReference Include="../Backend.Infra.Postgres/Backend.Infra.Postgres.csproj" />
+    <ProjectReference Include="../Backend.Infra.Redis/Backend.Infra.Redis.csproj" />
   </ItemGroup>
 </Project>

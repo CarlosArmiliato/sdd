@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Cortex.Mediator" />
+    <PackageReference Include="Cortex.Mediator.Behaviors.FluentValidation" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Backend.Contracts/Backend.Contracts.csproj" />
+    <ProjectReference Include="../Backend.Domain/Backend.Domain.csproj" />
+  </ItemGroup>
+</Project>

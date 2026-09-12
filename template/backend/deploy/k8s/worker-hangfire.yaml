@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-worker-hangfire
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-worker-hangfire
+  template:
+    metadata:
+      labels:
+        app: backend-worker-hangfire
+    spec:
+      serviceAccountName: backend-workload
+      containers:
+        - name: worker
+          image: replace.azurecr.io/backend-worker-hangfire:latest
+          envFrom:
+            - secretRef:
+                name: backend-runtime

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+  <ItemGroup>
+    <PackageReference Include="Cortex.Mediator" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Backend.App/Backend.App.csproj" />
+    <ProjectReference Include="../Backend.Infra.EventHub/Backend.Infra.EventHub.csproj" />
+    <ProjectReference Include="../Backend.Infra.Gate.EmpresaA/Backend.Infra.Gate.EmpresaA.csproj" />
+    <ProjectReference Include="../Backend.Infra.Gate.EmpresaB/Backend.Infra.Gate.EmpresaB.csproj" />
+    <ProjectReference Include="../Backend.Infra.Postgres/Backend.Infra.Postgres.csproj" />
+  </ItemGroup>
+</Project>

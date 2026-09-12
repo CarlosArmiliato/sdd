@@ -1,5 +1,5 @@
-using Backend.Application.Abstractions;
-using Backend.Application.Health;
+using Backend.App.Abstractions;
+using Backend.App.Health;
 
 namespace Backend.UnitTests.Health;
 

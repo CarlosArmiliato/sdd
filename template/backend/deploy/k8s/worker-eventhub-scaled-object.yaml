@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-worker-eventhub
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: backend-worker-eventhub
+  template:
+    metadata:
+      labels:
+        app: backend-worker-eventhub
+    spec:
+      serviceAccountName: backend-workload
+      containers:
+        - name: worker
+          image: replace.azurecr.io/backend-worker-eventhub:latest
+          envFrom:
+            - secretRef:
+                name: backend-runtime
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: backend-worker-eventhub
+spec:
+  scaleTargetRef:
+    name: backend-worker-eventhub
+  minReplicaCount: 0
+  maxReplicaCount: 20
+  pollingInterval: 15
+  cooldownPeriod: 60
+  triggers:
+    - type: azure-eventhub
+      metadata:
+        eventHubName: tickets
+        consumerGroup: backend
+        connectionFromEnv: EventHub__ConnectionString
+        storageConnectionFromEnv: EventHub__CheckpointStorageConnectionString
+        blobContainer: eventhub-checkpoints
+        unprocessedEventThreshold: "10"

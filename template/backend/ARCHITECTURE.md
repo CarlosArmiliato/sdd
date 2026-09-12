@@ -40,15 +40,15 @@ Cortex.Mediator realiza o despacho dentro do processo que possui o handler regis
 Para execução assíncrona, o fluxo é:
 
 ```text
-Controller → Command em Backend.App → IBackgroundRequestDispatcher
+Controller → Command em Backend.App → IBackgroundCommandScheduler
 → Hangfire → Backend.Worker.Hangfire → Cortex.Mediator → handler do worker
 ```
 
-O comando HTTP agenda o trabalho e retorna `202 Accepted` com o identificador do job. O payload do job pertence a `Backend.Contracts/BackgroundJobs`, é serializável, versionável, idempotente e não contém `HttpContext`, entidades EF Core ou tokens de usuário.
+O comando HTTP agenda o trabalho e retorna `202 Accepted` com o identificador do job. O comando serializado contém somente dados simples, é idempotente e não contém `HttpContext`, entidades EF Core ou tokens de usuário. O handler de `SincronizarCadastrosSapCommand` existe apenas em `Backend.Worker.Hangfire`.
 
 ## Eventos de integração
 
-Eventos de domínio são internos ao mini-monólito. Eventos de integração são contratos versionáveis em `Backend.Contracts/IntegrationEvents` e são transportados pelo Azure Event Hubs.
+Eventos de domínio são internos ao mini-monólito. Eventos de integração são contratos versionáveis em `Backend.Contracts/Events` e são transportados pelo Azure Event Hubs.
 
 ```text
 Domain Event → handler em Backend.App → Backend.Infra.EventHub → Event Hubs
@@ -56,6 +56,15 @@ Event Hubs → Backend.Worker.EventHub → Command em Backend.App → Domain
 ```
 
 Consumidores persistem checkpoints, processam mensagens de forma idempotente e propagam correlation ID. O worker de eventos utiliza grupo de consumidores próprio por fluxo.
+
+## Exemplo de negócio incluído
+
+- `Fazenda`, `AnoAgricola`, `Safra` e `Cultura` usam o agregado `Cadastro`, com CRUD pelos Controllers e sincronização diária pelo gate SAP.
+- `TicketRecebidoV1` chega pelo Event Hub. O consumidor usa Blob Storage para checkpoint e a tabela `EventosRecebidos` para idempotência.
+- O ticket nasce com `Item1`, `Item2` e `Item3`. A resposta do checklist e a criação de `Integracoes` são persistidas na mesma transação.
+- O worker de polling reserva a outbox com `FOR UPDATE SKIP LOCKED`, evitando que réplicas processem a mesma linha simultaneamente.
+- O handler `ResultadoChecklistEmpresaAHandler` transforma a linha de outbox no contrato `ResultadoChecklistEmpresaAV1` e publica no Event Hub.
+- Falhas voltam ao estado pendente com backoff exponencial; leases expirados são recuperados para suportar interrupções do pod.
 
 ## Persistência e integrações
 
