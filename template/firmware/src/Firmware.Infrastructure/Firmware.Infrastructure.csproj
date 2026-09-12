@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../Firmware.Application/Firmware.Application.csproj" />
+    <ProjectReference Include="../Firmware.Contracts/Firmware.Contracts.csproj" />
+    <ProjectReference Include="../Firmware.Domain/Firmware.Domain.csproj" />
+  </ItemGroup>
+</Project>

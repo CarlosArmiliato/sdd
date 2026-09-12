@@ -1,0 +1,8 @@
+bin/
+obj/
+.vs/
+TestResults/
+coverage/
+*.user
+*.suo
+appsettings.Local.json

@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Firmware.Api/Firmware.Api.csproj" />
+    <Project Path="src/Firmware.Application/Firmware.Application.csproj" />
+    <Project Path="src/Firmware.Contracts/Firmware.Contracts.csproj" />
+    <Project Path="src/Firmware.Domain/Firmware.Domain.csproj" />
+    <Project Path="src/Firmware.Infrastructure/Firmware.Infrastructure.csproj" />
+    <Project Path="src/Firmware.Workers/Firmware.Workers.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Firmware.Api.IntegrationTests/Firmware.Api.IntegrationTests.csproj" />
+    <Project Path="tests/Firmware.Application.UnitTests/Firmware.Application.UnitTests.csproj" />
+    <Project Path="tests/Firmware.ArchitectureTests/Firmware.ArchitectureTests.csproj" />
+    <Project Path="tests/Firmware.Domain.UnitTests/Firmware.Domain.UnitTests.csproj" />
+    <Project Path="tests/Firmware.Infrastructure.IntegrationTests/Firmware.Infrastructure.IntegrationTests.csproj" />
+    <Project Path="tests/Firmware.Workers.UnitTests/Firmware.Workers.UnitTests.csproj" />
+  </Folder>
+</Solution>

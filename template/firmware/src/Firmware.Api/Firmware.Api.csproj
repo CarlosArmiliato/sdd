@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Firmware.Application/Firmware.Application.csproj" />
+    <ProjectReference Include="../Firmware.Contracts/Firmware.Contracts.csproj" />
+    <ProjectReference Include="../Firmware.Domain/Firmware.Domain.csproj" />
+    <ProjectReference Include="../Firmware.Infrastructure/Firmware.Infrastructure.csproj" />
+    <ProjectReference Include="../Firmware.Workers/Firmware.Workers.csproj" />
+  </ItemGroup>
+</Project>
