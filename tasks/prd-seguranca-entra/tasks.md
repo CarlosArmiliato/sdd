@@ -2,7 +2,7 @@
 
 ## Tarefas
 
-- [ ] 1.0 Normalizar identidade e claims em ActorContext
+- [x] 1.0 Normalizar identidade e claims em ActorContext
 - [ ] 2.0 Persistir ActorId nos campos legados de auditoria
 - [ ] 3.0 Persistir catálogo de perfis, permissões, escopos e identidades de aplicação
 - [ ] 4.0 Implementar autorização por policies, permissões e escopos
