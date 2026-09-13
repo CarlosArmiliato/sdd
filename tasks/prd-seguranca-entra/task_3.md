@@ -31,13 +31,13 @@ Foram lidos o `AGENTS.md` da raiz, o `template/AGENTS.md` e todas as rules em `t
 
 ## Subtarefas
 
-- [ ] 3.1 Modelar `PerfilAcesso`, `Permissao`, `PerfilPermissao`, `MapeamentoRolePerfil`, `MapeamentoRoleEscopo` e `IdentidadeAplicacao` no domínio.
-- [ ] 3.2 Definir invariantes para chaves, tipo de identidade, tenant, client ID, object ID, status e escopos permitidos.
-- [ ] 3.3 Criar mapeamentos EF Core, índices e restrições de unicidade e integridade referencial.
-- [ ] 3.4 Criar migration PostgreSQL para o catálogo de autorização e identidades de aplicação.
-- [ ] 3.5 Implementar repositórios e `IAuthorizationCatalog` com consultas eficientes para autorização.
-- [ ] 3.6 Disponibilizar seed idempotente para permissões e perfis mínimos do sistema exemplo.
-- [ ] 3.7 Implementar testes unitários e de integração do catálogo, dos escopos e do isolamento de fornecedores.
+- [x] 3.1 Modelar `PerfilAcesso`, `Permissao`, `PerfilPermissao`, `MapeamentoRolePerfil`, `MapeamentoRoleEscopo` e `IdentidadeAplicacao` no domínio.
+- [x] 3.2 Definir invariantes para chaves, tipo de identidade, tenant, client ID, object ID, status e escopos permitidos.
+- [x] 3.3 Criar mapeamentos EF Core, índices e restrições de unicidade e integridade referencial.
+- [x] 3.4 Criar migration PostgreSQL para o catálogo de autorização e identidades de aplicação.
+- [x] 3.5 Implementar repositórios e `IAuthorizationCatalog` com consultas eficientes para autorização.
+- [x] 3.6 Disponibilizar seed idempotente para permissões e perfis mínimos do sistema exemplo.
+- [x] 3.7 Implementar testes unitários e de integração do catálogo, dos escopos e do isolamento de fornecedores.
 
 ## Detalhes de implementação
 
@@ -56,14 +56,14 @@ Seguir as seções “Modelo de autorização interno”, “Modelo de dados” 
 
 ### Testes de unidade
 
-- [ ] TU-04 — Resolver role para perfil e permissão.
-- [ ] TU-05 — Aplicar escopo de filial.
-- [ ] TU-07 — Resolver identidade de fornecedor.
-- [ ] TU-08 — Rejeitar fornecedor inativo ou divergente.
+- [x] TU-04 — Resolver role para perfil e permissão.
+- [x] TU-05 — Aplicar escopo de filial.
+- [x] TU-07 — Resolver identidade de fornecedor.
+- [x] TU-08 — Rejeitar fornecedor inativo ou divergente.
 
 ### Testes de integração
 
-- [ ] TI-08 — Garantir identidade exclusiva por fornecedor.
+- [x] TI-08 — Garantir identidade exclusiva por fornecedor.
 
 ### Testes E2E
 

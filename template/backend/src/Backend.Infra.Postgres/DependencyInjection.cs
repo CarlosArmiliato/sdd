@@ -1,4 +1,6 @@
+using Backend.App.Abstractions.Authorization;
 using Backend.App.Abstractions.Persistence;
+using Backend.Infra.Postgres.Authorization;
 using Backend.Infra.Postgres.Persistence;
 using Backend.Infra.Postgres.Persistence.Auditing;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,7 @@ public static class DependencyInjection
         services.AddScoped<ICadastroRepository, CadastroRepository>();
         services.AddScoped<ITicketRepository, TicketRepository>();
         services.AddScoped<IIntegracaoRepository, IntegracaoRepository>();
+        services.AddScoped<IAuthorizationCatalog, AuthorizationCatalog>();
         return services;
     }
 }
