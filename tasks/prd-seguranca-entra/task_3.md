@@ -31,12 +31,12 @@ Foram lidos o `AGENTS.md` da raiz, o `template/AGENTS.md` e todas as rules em `t
 
 ## Subtarefas
 
-- [ ] 3.1 Modelar `PerfilAcesso`, `Permissao`, `PerfilPermissao`, `MapeamentoRolePerfil`, `MapeamentoRoleEscopo` e `IdentidadeAplicacao` no domínio.
-- [ ] 3.2 Definir invariantes para chaves, tipo de identidade, tenant, client ID, object ID, status e escopos permitidos.
-- [ ] 3.3 Criar mapeamentos EF Core, índices e restrições de unicidade e integridade referencial.
-- [ ] 3.4 Criar migration PostgreSQL para o catálogo de autorização e identidades de aplicação.
-- [ ] 3.5 Implementar repositórios e `IAuthorizationCatalog` com consultas eficientes para autorização.
-- [ ] 3.6 Disponibilizar seed idempotente para permissões e perfis mínimos do sistema exemplo.
+- [x] 3.1 Modelar `PerfilAcesso`, `Permissao`, `PerfilPermissao`, `MapeamentoRolePerfil`, `MapeamentoRoleEscopo` e `IdentidadeAplicacao` no domínio.
+- [x] 3.2 Definir invariantes para chaves, tipo de identidade, tenant, client ID, object ID, status e escopos permitidos.
+- [x] 3.3 Criar mapeamentos EF Core, índices e restrições de unicidade e integridade referencial.
+- [x] 3.4 Criar migration PostgreSQL para o catálogo de autorização e identidades de aplicação.
+- [x] 3.5 Implementar repositórios e `IAuthorizationCatalog` com consultas eficientes para autorização.
+- [x] 3.6 Disponibilizar seed idempotente para permissões e perfis mínimos do sistema exemplo.
 - [ ] 3.7 Implementar testes unitários e de integração do catálogo, dos escopos e do isolamento de fornecedores.
 
 ## Detalhes de implementação
@@ -56,10 +56,10 @@ Seguir as seções “Modelo de autorização interno”, “Modelo de dados” 
 
 ### Testes de unidade
 
-- [ ] TU-04 — Resolver role para perfil e permissão.
-- [ ] TU-05 — Aplicar escopo de filial.
-- [ ] TU-07 — Resolver identidade de fornecedor.
-- [ ] TU-08 — Rejeitar fornecedor inativo ou divergente.
+- [x] TU-04 — Resolver role para perfil e permissão.
+- [x] TU-05 — Aplicar escopo de filial.
+- [x] TU-07 — Resolver identidade de fornecedor.
+- [x] TU-08 — Rejeitar fornecedor inativo ou divergente.
 
 ### Testes de integração
 
@@ -68,6 +68,10 @@ Seguir as seções “Modelo de autorização interno”, “Modelo de dados” 
 ### Testes E2E
 
 Não se aplica diretamente; os cenários completos de fornecedores serão cobertos na tarefa 8.0.
+
+## Bloqueio de validação de integração
+
+O teste TI-08 está implementado e exige a variável `BACKEND_TEST_POSTGRES_CONNECTION` apontando para um PostgreSQL isolado. A criação do container remoto foi bloqueada porque o acesso SSH a `carlos@192.168.0.6` recusou autenticação. Nenhum banco local foi usado como substituto. A validação de migration e unicidade deve ser executada quando o acesso remoto for restabelecido; até lá, a subtarefa 3.7, TI-08 e a tarefa 3.0 permanecem desmarcadas.
 
 ## Arquivos relevantes
 

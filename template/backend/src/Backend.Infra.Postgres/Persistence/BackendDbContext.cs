@@ -1,7 +1,9 @@
 using Backend.Domain.Auditing;
+using Backend.Domain.Authorization;
 using Backend.Domain.Cadastros;
 using Backend.Domain.Integracoes;
 using Backend.Domain.Tickets;
+using Backend.Infra.Postgres.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Infra.Postgres.Persistence;
@@ -12,6 +14,12 @@ public sealed class BackendDbContext(DbContextOptions<BackendDbContext> options)
     public DbSet<Ticket> Tickets => Set<Ticket>();
     public DbSet<Integracao> Integracoes => Set<Integracao>();
     public DbSet<EventoRecebido> EventosRecebidos => Set<EventoRecebido>();
+    public DbSet<PerfilAcesso> PerfisAcesso => Set<PerfilAcesso>();
+    public DbSet<Permissao> Permissoes => Set<Permissao>();
+    public DbSet<PerfilPermissao> PerfisPermissao => Set<PerfilPermissao>();
+    public DbSet<MapeamentoRolePerfil> MapeamentosRolePerfil => Set<MapeamentoRolePerfil>();
+    public DbSet<MapeamentoRoleEscopo> MapeamentosRoleEscopo => Set<MapeamentoRoleEscopo>();
+    public DbSet<IdentidadeAplicacao> IdentidadesAplicacao => Set<IdentidadeAplicacao>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -65,6 +73,7 @@ public sealed class BackendDbContext(DbContextOptions<BackendDbContext> options)
         });
 
         modelBuilder.ApplyMandatoryAuditing();
+        AuthorizationMappings.Apply(modelBuilder);
     }
 }
 
