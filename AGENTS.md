@@ -28,3 +28,9 @@ templates e as referências indicados pela skill.
 - `executar-review` — `processo/06-executar-review/SKILL.md` — use para
   revisar a conformidade do código com as regras do projeto, a TechSpec, as
   tarefas e os testes.
+## Ambiente local de desenvolvimento
+
+- O Rancher Desktop está disponível neste ambiente e pode ser usado para simular infraestrutura de desenvolvimento.
+- Use seus containers para executar PostgreSQL isolado por worktree quando testes de integração, migrations ou a aplicação exigirem banco real. Cada worktree deve usar nome, volume e porta exclusivos.
+- Use o Kubernetes local do Rancher Desktop para validar manifests, workloads e integrações de orquestração quando isso fizer parte da tarefa. Isole os recursos por namespace da worktree.
+- Não versione credenciais nem connection strings. Registre portas e processos iniciados, encerre os recursos criados ao final e não remova recursos pertencentes a outra worktree ou ao usuário.

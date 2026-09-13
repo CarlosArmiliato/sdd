@@ -81,3 +81,9 @@ Todo código produzido requer testes automatizados. A cobertura mínima é 80%; 
 - No firmware, use variáveis de ambiente ou arquivos externos protegidos e preserve a operação local durante indisponibilidade da LTE.
 - Propague correlation IDs e contexto operacional entre APIs, workers e eventos.
 - Cada worker deve encerrar graciosamente e concluir ou devolver o trabalho em andamento de forma segura.
+## Infraestrutura local
+
+- O Rancher Desktop está disponível para simular PostgreSQL e Kubernetes no desenvolvimento local.
+- Para testes de integração, migrations ou execução que exijam PostgreSQL, crie um container isolado para cada worktree, com nome, volume e porta exclusivos.
+- Para validar recursos Kubernetes, use o cluster local do Rancher Desktop e um namespace exclusivo por worktree.
+- Não versione credenciais ou connection strings. Documente os recursos e portas criados e desligue-os ao concluir a tarefa, sem afetar recursos de outras worktrees ou do usuário.
