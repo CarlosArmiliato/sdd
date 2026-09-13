@@ -1,7 +1,6 @@
 ---
 name: criar-tasks
 description: Tarefas — decomposição de uma funcionalidade em tarefas de implementação a partir do PRD e da TechSpec existentes em `tasks/prd-*/`. Use quando o usuário pedir para decompor uma funcionalidade em tarefas ou planejar sua execução. Não use para redigir o PRD (criar-prd) nem a TechSpec (criar-techspec).
-argument-hint: --prd nome-da-funcionalidade
 ---
 
 O argumento `--prd` identifica o slug da funcionalidade. Sem argumento, localize a pasta em `./tasks/prd-*/`. Os arquivos obrigatórios são `tasks/prd-[slug]/prd.md` e `tasks/prd-[slug]/techspec.md`; se algum estiver ausente, pare e indique a skill correspondente (`/criar-prd` ou `/criar-techspec`).
