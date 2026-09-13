@@ -160,12 +160,20 @@ public sealed class CreateAuthorizationCatalog : Migration
 
     private static void SeedCatalog(MigrationBuilder migrationBuilder)
     {
-        migrationBuilder.InsertData("PerfisAcesso", new[] { "Id", "Codigo", "Nome", "Ativo" }, new object[,]
+        migrationBuilder.InsertData(
+            table: "PerfisAcesso",
+            columns: new[] { "Id", "Codigo", "Nome", "Ativo" },
+            columnTypes: new[] { "uuid", "character varying(80)", "character varying(160)", "boolean" },
+            values: new object[,]
         {
             { Guid.Parse("a0000000-0000-0000-0000-000000000001"), "Administracao", "Administração do sistema", true },
             { Guid.Parse("a0000000-0000-0000-0000-000000000002"), "IntegracaoCadastrosEscrita", "Integração de cadastros com escrita", true }
         });
-        migrationBuilder.InsertData("Permissoes", new[] { "Id", "Codigo", "Descricao" }, new object[,]
+        migrationBuilder.InsertData(
+            table: "Permissoes",
+            columns: new[] { "Id", "Codigo", "Descricao" },
+            columnTypes: new[] { "uuid", "character varying(120)", "character varying(240)" },
+            values: new object[,]
         {
             { PermissionId(1), "Cadastros.Read", "Consultar cadastros" }, { PermissionId(2), "Cadastros.Write", "Criar e alterar cadastros" },
             { PermissionId(3), "Cadastros.Delete", "Excluir cadastros" }, { PermissionId(4), "Tickets.Read", "Consultar tickets" },
@@ -173,10 +181,26 @@ public sealed class CreateAuthorizationCatalog : Migration
             { PermissionId(7), "DirectoryIdentities.Resolve", "Resolver identidades no diretório" }
         });
         Guid administration = Guid.Parse("a0000000-0000-0000-0000-000000000001");
-        migrationBuilder.InsertData("PerfisPermissao", new[] { "PerfilId", "PermissaoId" }, ProfilePermissions(administration));
-        migrationBuilder.InsertData("PerfisPermissao", new[] { "PerfilId", "PermissaoId" }, new object[,] { { Guid.Parse("a0000000-0000-0000-0000-000000000002"), PermissionId(1) }, { Guid.Parse("a0000000-0000-0000-0000-000000000002"), PermissionId(2) } });
-        migrationBuilder.InsertData("MapeamentosRolePerfil", new[] { "Id", "RoleValue", "PerfilId", "SubjectType", "Ativo" }, new object[,] { { Guid.Parse("a0000000-0000-0000-0000-000000000101"), "Administracao", administration, 3, true }, { Guid.Parse("a0000000-0000-0000-0000-000000000102"), "Cadastros.Integration.Write", Guid.Parse("a0000000-0000-0000-0000-000000000002"), 2, true } });
-        migrationBuilder.InsertData("MapeamentosRoleEscopo", new[] { "Id", "RoleValue", "ScopeType", "ScopeValue", "Ativo" }, new object[,] { { Guid.Parse("a0000000-0000-0000-0000-000000000201"), "Scope.Branch.FilialA", "Filial", "FilialA", true } });
+        migrationBuilder.InsertData(
+            table: "PerfisPermissao",
+            columns: new[] { "PerfilId", "PermissaoId" },
+            columnTypes: new[] { "uuid", "uuid" },
+            values: ProfilePermissions(administration));
+        migrationBuilder.InsertData(
+            table: "PerfisPermissao",
+            columns: new[] { "PerfilId", "PermissaoId" },
+            columnTypes: new[] { "uuid", "uuid" },
+            values: new object[,] { { Guid.Parse("a0000000-0000-0000-0000-000000000002"), PermissionId(1) }, { Guid.Parse("a0000000-0000-0000-0000-000000000002"), PermissionId(2) } });
+        migrationBuilder.InsertData(
+            table: "MapeamentosRolePerfil",
+            columns: new[] { "Id", "RoleValue", "PerfilId", "SubjectType", "Ativo" },
+            columnTypes: new[] { "uuid", "character varying(120)", "uuid", "integer", "boolean" },
+            values: new object[,] { { Guid.Parse("a0000000-0000-0000-0000-000000000101"), "Administracao", administration, 3, true }, { Guid.Parse("a0000000-0000-0000-0000-000000000102"), "Cadastros.Integration.Write", Guid.Parse("a0000000-0000-0000-0000-000000000002"), 2, true } });
+        migrationBuilder.InsertData(
+            table: "MapeamentosRoleEscopo",
+            columns: new[] { "Id", "RoleValue", "ScopeType", "ScopeValue", "Ativo" },
+            columnTypes: new[] { "uuid", "character varying(120)", "character varying(80)", "character varying(120)", "boolean" },
+            values: new object[,] { { Guid.Parse("a0000000-0000-0000-0000-000000000201"), "Scope.Branch.FilialA", "Filial", "FilialA", true } });
     }
 
     private static Guid PermissionId(int value) => Guid.Parse($"a0000000-0000-0000-0000-{value + 300:000000000000}");

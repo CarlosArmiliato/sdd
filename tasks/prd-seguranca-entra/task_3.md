@@ -37,7 +37,7 @@ Foram lidos o `AGENTS.md` da raiz, o `template/AGENTS.md` e todas as rules em `t
 - [x] 3.4 Criar migration PostgreSQL para o catálogo de autorização e identidades de aplicação.
 - [x] 3.5 Implementar repositórios e `IAuthorizationCatalog` com consultas eficientes para autorização.
 - [x] 3.6 Disponibilizar seed idempotente para permissões e perfis mínimos do sistema exemplo.
-- [ ] 3.7 Implementar testes unitários e de integração do catálogo, dos escopos e do isolamento de fornecedores.
+- [x] 3.7 Implementar testes unitários e de integração do catálogo, dos escopos e do isolamento de fornecedores.
 
 ## Detalhes de implementação
 
@@ -63,15 +63,11 @@ Seguir as seções “Modelo de autorização interno”, “Modelo de dados” 
 
 ### Testes de integração
 
-- [ ] TI-08 — Garantir identidade exclusiva por fornecedor.
+- [x] TI-08 — Garantir identidade exclusiva por fornecedor.
 
 ### Testes E2E
 
 Não se aplica diretamente; os cenários completos de fornecedores serão cobertos na tarefa 8.0.
-
-## Bloqueio de validação de integração
-
-O teste TI-08 está implementado e exige a variável `BACKEND_TEST_POSTGRES_CONNECTION` apontando para um PostgreSQL isolado. A criação do container remoto foi bloqueada porque o acesso SSH a `carlos@192.168.0.6` recusou autenticação. Nenhum banco local foi usado como substituto. A validação de migration e unicidade deve ser executada quando o acesso remoto for restabelecido; até lá, a subtarefa 3.7, TI-08 e a tarefa 3.0 permanecem desmarcadas.
 
 ## Arquivos relevantes
 
