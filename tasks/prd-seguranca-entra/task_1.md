@@ -27,12 +27,12 @@ Foram lidos o `AGENTS.md` da raiz, o `template/AGENTS.md` e todas as rules em `t
 
 ## Subtarefas
 
-- [ ] 1.1 Criar os tipos `ActorContext`, `ActorType` e os value objects necessários para tenant, objeto e aplicação.
-- [ ] 1.2 Implementar a composição e validação do `ActorId` versionado para usuários, aplicações e fallback local/teste.
-- [ ] 1.3 Evoluir `IUserContext` para expor `ActorId`, tipo do ator, tenant, object ID, client ID e roles, preservando compatibilidade temporária com `Username`.
-- [ ] 1.4 Implementar `ActorContextFactory` e `HttpUserContext` para normalizar claims delegadas e app-only, rejeitando identidades incompletas ou ambíguas.
-- [ ] 1.5 Registrar serviços e opções com DI e validação no startup.
-- [ ] 1.6 Implementar os testes unitários de normalização e rejeição de claims.
+- [x] 1.1 Criar os tipos `ActorContext`, `ActorType` e os value objects necessários para tenant, objeto e aplicação.
+- [x] 1.2 Implementar a composição e validação do `ActorId` versionado para usuários, aplicações e fallback local/teste.
+- [x] 1.3 Evoluir `IUserContext` para expor `ActorId`, tipo do ator, tenant, object ID, client ID e roles, preservando compatibilidade temporária com `Username`.
+- [x] 1.4 Implementar `ActorContextFactory` e `HttpUserContext` para normalizar claims delegadas e app-only, rejeitando identidades incompletas ou ambíguas.
+- [x] 1.5 Registrar serviços e opções com DI e validação no startup.
+- [x] 1.6 Implementar os testes unitários de normalização e rejeição de claims.
 
 ## Detalhes de implementação
 
@@ -51,9 +51,9 @@ Seguir as seções “Modelo de identidade e ActorId”, “Claims e normalizaç
 
 ### Testes de unidade
 
-- [ ] TU-01 — Criar ActorId de usuário.
-- [ ] TU-02 — Criar ActorId de aplicação.
-- [ ] TU-03 — Rejeitar claims incompletas ou ambíguas.
+- [x] TU-01 — Criar ActorId de usuário.
+- [x] TU-02 — Criar ActorId de aplicação.
+- [x] TU-03 — Rejeitar claims incompletas ou ambíguas.
 
 ### Testes de integração
 

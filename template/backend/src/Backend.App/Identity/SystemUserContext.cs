@@ -8,14 +8,11 @@ public sealed class SystemUserContext(string actorId) : IUserContext
 
     public bool IsAuthenticated => false;
     public bool IsApplication => true;
-    public string ActorId { get; } = RequireActorId(actorId);
-    public string? TenantId => null;
+    public string ActorId { get; } = Backend.App.Identity.ActorId.Parse(actorId).Value;
+    public Guid? TenantId => null;
+    public Guid? ObjectId => null;
+    public Guid? ClientId => null;
     public string Username => ActorId;
     public IReadOnlyCollection<string> Roles => EmptyClaims;
     public IReadOnlyCollection<string> Scopes => EmptyClaims;
-
-    private static string RequireActorId(string value) =>
-        !string.IsNullOrWhiteSpace(value)
-            ? value
-            : throw new ArgumentException("O identificador do processo é obrigatório.", nameof(value));
 }
