@@ -1,7 +1,6 @@
 ---
 name: criar-techspec
 description: TechSpec — especificação técnica derivada de um PRD existente. Use quando o usuário pedir uma TechSpec ou a arquitetura de uma funcionalidade que já tenha um PRD em `tasks/prd-*/prd.md`. Não use sem PRD (criar-prd) nem para decompor em tarefas (criar-tasks).
-argument-hint: --prd nome-da-funcionalidade
 ---
 
 O argumento `--prd` identifica o slug da funcionalidade. Sem argumento, localize a pasta em `./tasks/prd-*/`. O PRD obrigatório é `tasks/prd-[slug]/prd.md`; se não existir, pare e indique `/criar-prd`.

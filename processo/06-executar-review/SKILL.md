@@ -1,7 +1,6 @@
 ---
 name: executar-review
 description: Revisão de código — revise e estabilize o código de uma funcionalidade quanto à conformidade com as regras do projeto, à aderência à TechSpec e às tarefas e aos testes, com relatório final e veredito. Use quando o usuário pedir para revisar código, executar uma revisão de código, validar a conformidade com as regras ou corrigir problemas encontrados durante a revisão. Não use para validar o comportamento em QA (executar-qa) nem para implementar novas tarefas.
-argument-hint: --prd nome-da-funcionalidade
 ---
 
 O argumento `--prd` identifica o slug da funcionalidade. Sem argumento, localize a pasta em `./tasks/prd-*/`. Leia o `AGENTS.md` do projeto. Em `tasks/prd-[slug]/`, leia `techspec.md` e `tasks.md`; consulte `prd.md` somente quando necessário para esclarecer um requisito. Gere o `codereview.md` na mesma pasta.

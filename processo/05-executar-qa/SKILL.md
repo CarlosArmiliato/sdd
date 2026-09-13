@@ -1,7 +1,6 @@
 ---
 name: executar-qa
 description: "QA — valide e estabilize uma funcionalidade implementada contra o PRD, a TechSpec e as tarefas: testes de unidade, de integração e E2E com a ferramenta de navegador disponível, acessibilidade, responsividade, correção dos bugs encontrados e um relatório final com evidências. Use quando o usuário pedir para executar QA. Não use para implementar novas tarefas nem para revisar o código (executar-review)."
-argument-hint: --prd nome-da-funcionalidade
 ---
 
 O argumento `--prd` identifica o slug da funcionalidade. Sem argumento, localize a pasta em `./tasks/prd-*/`. Leia o `AGENTS.md` do projeto. Em `tasks/prd-[slug]/`, leia `prd.md`, `techspec.md` e `tasks.md`; gere e mantenha o `qa.md` com os defeitos, as correções, os testes de regressão e as evidências. Salve todas as evidências da ferramenta de navegador em `tasks/prd-[slug]/evidences/`.

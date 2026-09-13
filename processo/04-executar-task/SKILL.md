@@ -1,7 +1,6 @@
 ---
 name: executar-task
 description: Tarefa — identifique e implemente a próxima tarefa de uma funcionalidade a partir do PRD, da TechSpec e do tasks.md, marcando-a como concluída ao final. Use quando o usuário pedir para executar, implementar ou começar uma tarefa/subtarefa, ou dar continuidade à implementação de uma funcionalidade. Não use para revisar (executar-review) nem validar em QA (executar-qa) o que já foi implementado.
-argument-hint: --prd nome-da-funcionalidade
 ---
 
 O argumento `--prd` identifica o slug da funcionalidade. Sem argumento, localize a pasta em `./tasks/prd-*/`. Os arquivos obrigatórios em `tasks/prd-[slug]/` são `prd.md`, `techspec.md` e `tasks.md`; se algum estiver ausente, pare e indique a skill correspondente (`/criar-prd`, `/criar-techspec` ou `/criar-tasks`).
