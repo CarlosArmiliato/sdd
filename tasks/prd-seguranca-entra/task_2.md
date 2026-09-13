@@ -28,12 +28,12 @@ Foram lidos o `AGENTS.md` da raiz, o `template/AGENTS.md` e todas as rules em `t
 
 ## Subtarefas
 
-- [ ] 2.1 Localizar todos os pontos que preenchem `CreatorUsername` e `ModifierUsername` e centralizar a resolução do valor de auditoria.
-- [ ] 2.2 Alterar o interceptor ou writer de auditoria para persistir `IUserContext.ActorId` nos campos legados, sem renomear colunas.
-- [ ] 2.3 Impedir novas gravações de e-mail, nome ou username quando existir uma identidade autenticada.
-- [ ] 2.4 Implementar leitura tolerante que reconheça valores `v1:*` e preserve valores históricos legados sem reescrita automática.
-- [ ] 2.5 Garantir que criação e alteração usem o mesmo contrato para atores humanos e aplicações.
-- [ ] 2.6 Implementar testes unitários e de integração da persistência e da compatibilidade histórica.
+- [x] 2.1 Localizar todos os pontos que preenchem `CreatorUsername` e `ModifierUsername` e centralizar a resolução do valor de auditoria.
+- [x] 2.2 Alterar o interceptor ou writer de auditoria para persistir `IUserContext.ActorId` nos campos legados, sem renomear colunas.
+- [x] 2.3 Impedir novas gravações de e-mail, nome ou username quando existir uma identidade autenticada.
+- [x] 2.4 Implementar leitura tolerante que reconheça valores `v1:*` e preserve valores históricos legados sem reescrita automática.
+- [x] 2.5 Garantir que criação e alteração usem o mesmo contrato para atores humanos e aplicações.
+- [x] 2.6 Implementar testes unitários e de integração da persistência e da compatibilidade histórica.
 
 ## Detalhes de implementação
 
@@ -49,12 +49,12 @@ Seguir as seções “Persistência e compatibilidade da auditoria” e “Estra
 
 ### Testes de unidade
 
-- [ ] TU-09 — Gravar ActorId nos campos legados de auditoria.
-- [ ] TU-10 — Preservar auditoria histórica legada.
+- [x] TU-09 — Gravar ActorId nos campos legados de auditoria.
+- [x] TU-10 — Preservar auditoria histórica legada.
 
 ### Testes de integração
 
-- [ ] TI-03 — Persistir auditoria de usuário humano sem PII.
+- [x] TI-03 — Persistir auditoria de usuário humano sem PII.
 
 ### Testes E2E
 

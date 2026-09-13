@@ -33,6 +33,6 @@ public sealed class AuditableSaveChangesInterceptor(
         }
         dbContext.ChangeTracker.DetectChanges();
         DateTimeOffset timestamp = timeProvider.GetUtcNow();
-        new AuditChangeApplier(dbContext, timestamp, userContext.Username).Apply();
+        new AuditChangeApplier(dbContext, timestamp, AuditActorIdResolver.ForPersistence(userContext)).Apply();
     }
 }
